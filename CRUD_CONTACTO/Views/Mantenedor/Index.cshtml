@@ -1,0 +1,46 @@
+﻿@model List<ContactoModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Lista de Contactos</h1>
+<div class="card">
+    <div class="card-header">Lista de Contactos</div>
+    <div class="card-body">
+        <a asp-action="guardar" asp-controller="Mantenedor" class="btn btn-success">Crear Nuevo Contacto</a>
+
+        <form asp-controller="Mantenedor" asp-action="index">
+            <p>
+                Buscar: <input type="text" name="dato" class="form-text"/>
+                <input type="submit" value="Buscar" class="btn btn-primary btn-sm"/>
+            </p>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                   <tr>
+                        <td>@item.Nombres</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Correo</td>
+                        <td>
+                            <a asp-action="editar" asp-controller="Mantenedor" class="btn btn-primary btn-sm" asp-route-IdContacto="@item.IdContacto">Editar</a>
+                            <a asp-action="eliminar" asp-controller="Mantenedor" class="btn btn-danger btn-sm" asp-route-IdContacto="@item.IdContacto">Eliminar</a>
+                        </td>
+                   </tr> 
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 
+
